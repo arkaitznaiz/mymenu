@@ -13,5 +13,6 @@ python manage.py run
 Basically, all asked ponts in specification are covered, but these ones:
 
 - User management is incomplete: you can register a new user, but for the rest you should use admin interface.
+- No email sending at all: its not configured to work with celery, neither basic email SMTP configuration.
 - Some exceptions.
 - A little bug showing a different product name on breadcrumbs when updating its name, and only in case of that name being already registered earlier.
