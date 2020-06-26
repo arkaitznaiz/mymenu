@@ -13,7 +13,7 @@ Exectute the following commands:
 - pip install -r requirements.txt
 - python manage.py migrate
 - python manage.py createsuperuser
-- python manage.py run
+- python manage.py runserver
 
 # TO-DO
 Basically, all asked ponts in specification are covered, but these ones:
