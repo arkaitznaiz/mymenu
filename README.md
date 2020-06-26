@@ -2,8 +2,12 @@
 Test project for Serem
 
 # Run
-You must used PostgreSQL and set it (view mymenu/settings.py).
+You must use PostgreSQL and set it (view mymenu/settings.py). You could used SQLite if you want to, but you'll have to change configuration in mymenu/settings.py.
+
+
 You will need Python 3.8.2.
+
+
 Exectute the following commands:
 
 - pip install -r requirements.txt
