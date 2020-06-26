@@ -1,0 +1,38 @@
+{% extends "nutritionalvalues_list.html" %}
+{% load product_extras %}
+{% load django_bootstrap_breadcrumbs %}
+
+{% block migas %}
+{% block breadcrumbs %}
+		{{ block.super }}
+    	{% breadcrumb_safe nutritionalvalue.nutritionalinfo.name|detail 'products:nutritionalvalues-detail' nutritionalvalue.pk %}
+{% endblock %}
+{% render_breadcrumbs "breadcrumbs.html" %}
+{% endblock %}
+
+{% block content %}
+
+<div class="row card mx-auto">
+    <div class="card-header">
+        <h5 class="card-title">Nutritional Information Detail #{{nutritionalvalue.id}}</h5>
+    </div>
+    <div class="card-body">
+    <dl class="row">
+      <dt class="col-sm-3">Product:</dt>
+      <dd class="col-sm-9">{{ nutritionalvalue.product }}</dd>
+      <dt class="col-sm-3">Nutritional Value:</dt>
+      <dd class="col-sm-9">{{ nutritionalvalue.nutritionalinfo }}</dd>
+      <dt class="col-sm-3">Value:</dt>
+      <dd class="col-sm-9">{{ nutritionalvalue.value }}</dd>
+    </dl>
+
+    </div>
+</div>
+<br/>
+{% if user.is_authenticated %}
+<div class="row">
+  <div class="col col-9"><a class="btn btn-secondary" type="button" href="{% url 'products:nutritionalvalues-update' nutritionalvalue.pk %}">Edit</a></div>
+  <div class="col col-3"><a class="btn btn-danger" type="button" href="{% url 'products:nutritionalvalues-delete' nutritionalvalue.pk %}">Delete</a></div>
+</div>
+{% endif %}
+{% endblock %}

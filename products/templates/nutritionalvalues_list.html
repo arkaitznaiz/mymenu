@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% load bootstrap4 %}
+{% load django_bootstrap_breadcrumbs %}
+
+{% block migas %}
+{% block breadcrumbs %}
+		{{ block.super }}
+    	{% breadcrumb_safe "<i class='fas fa-tachometer-alt'></i> Nutr. Values" 'products:nutritionalvalues-list' %}
+{% endblock %}
+{% render_breadcrumbs "breadcrumbs.html" %}
+{% endblock %}
+
+{% block content %}
+<h2><i class='fas fa-tachometer-alt'></i> Nutritional Values</h2>
+{% if nutritionalvalues %}
+
+<div class="row mx-auto">
+    <table class="col col-md-6 table table-striped table-hover">
+        <caption>Click on name to view detail, update or delete entry.</caption>
+        <tr>
+            <thead class="thead-dark text-center">
+                <tr>
+                    <th scope="col">Product</th>
+                    <th scope="col">Nutritional info</th>
+                    <th scope="col">Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for nutritionalvalue in nutritionalvalues %}
+                <tr>
+                    <td>{{nutritionalvalue.product}}</td>
+                    <td><a href="{% url 'products:nutritionalvalues-detail' nutritionalvalue.pk %}">{{ nutritionalvalue.nutritionalinfo }}</a></td>
+                    <td>{{nutritionalvalue.value}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+    </table>
+</div>
+
+{% if is_paginated %}
+    {% include "pagination.html" %}
+{% endif %}
+{% if user.is_authenticated %}
+<p><a class="btn btn-primary" type="button" href="{% url 'products:nutritionalvalues-create' %}">Add entry</a></p>
+{% endif %}
+{% else %}
+{% if user.is_authenticated %}
+<p>There are no items yet. <a href="{% url 'products:nutritionalvalues-create' %}">Create the first one</a>.</p>
+{% else %}
+<p>There are no items yet. You must <a href="{% url 'login' %}">log in</a> to create the first one.</p>
+{% endif %}
+{% endif %}
+{% endblock %}

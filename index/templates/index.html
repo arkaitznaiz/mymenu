@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% load django_bootstrap_breadcrumbs %}
+
+{% block migas %}
+{% block breadcrumbs %}
+{% if user.is_authenticated %}
+	{% clear_breadcrumbs %}
+	{% breadcrumb_safe "<i class='fas fa-home'></i>&nbsp;Home" 'index:index' %}
+{% render_breadcrumbs "breadcrumbs.html" %}
+{% else %}
+	{% clear_breadcrumbs %}
+{% endif %}
+{% endblock %}
+{% endblock %}
+
+{% block content %}
+{% if not user.is_authenticated %}
+<div class="jumbotron">
+	<h1 class="display-4">Wellcome to My Menu!</h1>
+	<p class="lead">Here you'll find our products and some interesting nutritional information about them.</p>
+	<hr class="my-4">
+	<p>Please, login or sign up to manage this app.</p>
+	<p class="lead">
+	  <a class="btn btn-primary btn-lg" href="{% url 'login' %}" role="button"><i class="fas fa-sign-in-alt"></i>&nbsp;Login or Sign up</a>
+	</p>
+  </div>
+{% endif %}
+<div class="row mx-auto">
+	<div class="col col-5 card">
+		<div class="card-header">
+			<h3 class="card-title"><i class='fas fa-utensils'></i> Products</h3>
+		</div>
+		<div class="card-body">
+			<p class="lead">List of our products with nutritional information</p>
+			<p><a class="btn btn-huge btn-primary" type="button" href="{% url 'products:product-list' %}">View list</a></p>
+		</div>
+	</div>
+	{% if user.is_authenticated %}
+	<div class="col col-2"></div>
+	<div class="col col-5 card">
+		<div class="card-header">
+			<h3 class="card-title"><i class='fas fa-info-circle'></i> Nutritional Information</h3>
+		</div>
+		<div class="card-body">
+			<p class="lead">List of nutritional information and its units</p>
+			<p><a class="btn btn-huge btn-primary" type="button" href="{% url 'nutritionalinfo:nutrinfo-list' %}">View list</a></p>
+		</div>
+	</div>
+	{% endif %}
+</div>
+
+{% endblock %}

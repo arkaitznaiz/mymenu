@@ -1,0 +1,13 @@
+{% for url, label in breadcrumbs %}
+	{% if forloop.counter != breadcrumbs_total %}
+	<li class="nav-item" style="overflow: hidden;text-overflow: ellipsis;">
+	{% else %}
+	<li class="nav-item active" style="overflow: hidden;text-overflow: ellipsis;">
+	{% endif %}
+		{% if forloop.counter != breadcrumbs_total %}
+		<a class="nav-link" style="overflow: hidden;text-overflow: ellipsis;" href="{{ url }}">{{ label|safe }}&nbsp;&gt;</a>
+		{% else %}
+		<span class="nav-link" style="overflow: hidden;text-overflow: ellipsis;">{{ label|safe }}</span>
+        {% endif %}
+	</li>
+{% endfor %}

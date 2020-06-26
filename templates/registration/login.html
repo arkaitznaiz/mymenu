@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% load django_bootstrap_breadcrumbs %}
+
+
+
+{% block migas %}
+{% block breadcrumbs %}
+	{% if user.is_authenticated %}
+		{{ block.super }}
+    	{% breadcrumb_safe "<i class='fas fa-sign-in-alt'></i> Login" 'login' %}
+    {% else %}
+    	{% clear_breadcrumbs %}
+    	{% breadcrumb_safe "<i class='fas fa-sign-in-alt'></i> Login" 'login' %}
+    {% endif %}
+{% endblock %}
+{% render_breadcrumbs "breadcrumbs.html" %}
+{% endblock %}
+
+{% block login_area %}{% endblock %}
+
+{% block content %}
+<div class="text-center" id="login">
+{% if form.errors %}
+<p>Wrong username and/or password. Try again, please.</p>
+{% endif %}
+
+
+    {% if user.is_authenticated %}
+    <p>YOU ARE ALLREADY LOGGED IN.</p>
+    {% else %}
+    {{ form.media }}
+    <form class="form" name="LoginForm" action="{% url 'login' %}" method="post">
+    {% csrf_token %}
+    {% if next %}
+        <input type="hidden" name="next" value="{{ next }}" />
+    {% endif %}
+    <div>
+        <label class="sr-only" for="username">Username</label>
+        <div>
+            <input type="text" id="username" name="username"  placeholder="Username">
+        </div>
+    </div>
+    <div style="padding-top:10px">
+        <label class="sr-only" for="password">Password</label>
+        <div>
+            <input type="password" name="password" id="password" placeholder="Password">
+        </div>
+    </div>
+    <div>
+        <div style="padding-top:10px">
+            <button type="submit" class="btn btn-lg btn-primary">Login</button>
+        </div>
+    </div>
+    </form>
+<p style="padding-top:10px"><a href="{% url 'password_reset' %}">Did you forget your password?</a></p>
+<p style="padding-top:10px;">Don't have an account? <a href="{% url 'django_registration_register' %}">Sign up here!</a></p>
+{% endif %}
+
+
+
+
+</div>
+{% endblock %}

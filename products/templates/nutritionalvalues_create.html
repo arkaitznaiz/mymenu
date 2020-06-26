@@ -1,0 +1,26 @@
+{% extends "products_detail.html" %}
+{% load bootstrap4 %}
+{% load django_bootstrap_breadcrumbs %}
+
+{% block migas %}
+{% block breadcrumbs %}
+		{{ block.super }}
+    	{% breadcrumb_safe "<i class='fas fa-plus-circle'></i> Add nutritional value" 'products:nutritionalvalues-create' product.id %}
+{% endblock %}
+{% render_breadcrumbs "breadcrumbs.html" %}
+{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h5 class="card-title">Create a new Nutritional Value entry for {{ product.name }}</h5>
+    </div>
+    <div class="card-body">
+        <form method="post">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            <button type="submit" class="btn btn-success">Create</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

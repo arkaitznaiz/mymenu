@@ -1,0 +1,6 @@
+Django
+django-registration
+django-bootstrap4
+django-bootstrap-breadcrumbs
+django-filter
+psycopg2

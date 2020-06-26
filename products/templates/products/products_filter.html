@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% load product_extras %}
+{% load bootstrap4 %}
+{% load django_bootstrap_breadcrumbs %}
+
+{% block migas %}
+{% block breadcrumbs %}
+		{{ block.super }}
+    	{% breadcrumb_safe "<i class='fas fa-utensils'></i> Products" 'products:product-list' %}
+{% endblock %}
+{% render_breadcrumbs "breadcrumbs.html" %}
+{% endblock %}
+
+{% block content %}
+<div class="row mx-auto">
+    <h2><i class='fas fa-utensils'></i> Products</h2>
+</div>
+<br>
+<div class="row mx-auto">
+    <form class="form" method="get">
+        {% bootstrap_form filter.form %}
+        <button class="btn btn-lg btn-success" type="submit"><i class="fas fa-search"></i> Filter</button>
+    </form>
+</div>
+<br>
+{% if filter.qs %}
+
+<div class="row mx-auto">
+    <table class="table table-striped table-hover">
+        {% if user.is_authenticated %}
+        <caption>Click on name to view detail, update or delete entry.</caption>
+        {% else %}
+        <caption>Click me to view detail.</caption>
+        {% endif %}
+        <tr>
+            <thead class="thead-dark text-center">
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Nutritional values</th>
+                    <th scope="col">Active</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in filter.qs %}
+                <tr>
+                    <td><a href="{% url 'products:product-detail' product.pk %}">{{ product.name }}</a></td>
+                    <td>{{product.description}}</td>
+                    <td>{% if product|get_nutrivalues %}
+                            {% for nutrivalue in product|get_nutrivalues %}
+                            <dl class="row">
+                                <dt style="font-weight:normal;" class="col">{{ nutrivalue.nutritionalinfo.name }}:</dt>
+                                <dd class="col">{{ nutrivalue.value }}&nbsp;{{ nutrivalue.nutritionalinfo.unit }}</dd>
+                            </dl>
+                            {% endfor %}
+                        {% else %}<hr style="width: 3em;text-align:center;">{% endif %}</td>
+                    <td>{{product.active}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+    </table>    
+</div>
+
+{% if user.is_authenticated %}
+<p><a class="btn btn-primary" type="button" href="{% url 'products:product-create' %}"><i class="fas fa-plus"></i> Add product</a></p>
+<br>
+{% endif %}
+{% else %}
+{% if user.is_authenticated %}
+<p>There are no items yet. <a href="{% url 'products:product-create' %}">Create one</a>.</p>
+{% else %}
+<p>There are no items yet. You must <a href="{% url 'login' %}">log in</a> to create one.</p>
+{% endif %}
+{% endif %}
+{% endblock %}

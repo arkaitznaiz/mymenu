@@ -1,0 +1,28 @@
+{% extends "products_detail.html" %}
+{% load bootstrap4 %}
+
+{% load django_bootstrap_breadcrumbs %}
+
+{% block migas %}
+{% block breadcrumbs %}
+		{{ block.super }}
+    	{% breadcrumb_safe "<i class='fas fa-pen-fancy'></i> Update" 'products:product-update' product.pk %}
+{% endblock %}
+{% render_breadcrumbs "breadcrumbs.html" %}
+{% endblock %}
+
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">Product Update #{{product.id}}</h3>
+    </div>
+    <div class="card-body">
+        <form method="post">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            <button type="submit" class="btn btn-success">Update</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

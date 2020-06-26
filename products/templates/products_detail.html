@@ -1,0 +1,68 @@
+{% extends "products/products_filter.html" %}
+{% load product_extras %}
+{% load django_bootstrap_breadcrumbs %}
+
+{% block migas %}
+{% block breadcrumbs %}
+		{{ block.super }}
+    	{% breadcrumb_safe product.name|detail 'products:product-detail' product.pk %}
+{% endblock %}
+{% render_breadcrumbs "breadcrumbs.html" %}
+{% endblock %}
+
+{% block content %}
+
+<div class="row card mx-auto">
+    <div class="card-header">
+        <h3 class="card-title">Product Detail #{{product.id}}</h3>
+    </div>
+    <div class="card-body">
+    <dl class="row">
+      <dt style="font-weight: bold;" class="col-sm-3 lead">Name:</dt>
+      <dd class="col-sm-9 lead">{{ product.name }}</dd>
+      <dt class="col-sm-3">Description:</dt>
+      <dd class="col-sm-9">{{ product.description }}</dd>
+      <dt class="col-sm-3">Active:</dt>
+      <dd class="col-sm-9">{{ product.active }}</dd>
+    </dl>
+
+    </div>
+</div>
+<br/>
+{% if user.is_authenticated %}
+<div class="row">
+  <div class="col col-9"><a class="btn btn-secondary" type="button" href="{% url 'products:product-update' product.pk %}"><i class="fas fa-pen"></i> Edit</a></div>
+  <div class="col col-3"><a class="btn btn-danger" type="button" href="{% url 'products:product-delete' product.pk %}"><i class="fas fa-trash"></i> Delete</a></div>
+</div>
+<br/>
+{% endif %}
+
+{% if nutritionalvalues %}
+  <div class="row card mx-auto">
+    <div class="card-header">
+        <h5 class="card-title">Nutritional values{% if user.is_authenticated %}&nbsp;&nbsp;&nbsp;<a class="btn btn-outline-success" href="{% url 'products:nutritionalvalues-create' product.pk %}"><i class='fas fa-plus'></i> Add entry</a>{% endif %}</h5>
+    </div>
+    <div class="card-body">
+      {% for nutrivalue in nutritionalvalues %}
+        {% if not user.is_authenticated %}
+        <dl class="row">
+          <dt class="col-sm-3">{{ nutrivalue.nutritionalinfo.name }}:</dt>
+          <dd class="col-sm-9">{{ nutrivalue.value }}&nbsp;{{ nutrivalue.nutritionalinfo.unit }}</dd>
+        </dl>
+        {% else %}
+        <dl class="row">
+          <dt class="col-sm-3">{{ nutrivalue.nutritionalinfo.name }}:</dt>
+          <dd class="col-sm-9">{{ nutrivalue.value }}&nbsp;{{ nutrivalue.nutritionalinfo.unit }} &nbsp;&nbsp;&nbsp;<a type="button" class="btn btn-link" href="{% url 'products:nutritionalvalues-update' nutrivalue.pk %}"><i class='fas fa-pen'></i></a><a type="button" class="btn btn-link" href="{% url 'products:nutritionalvalues-delete' nutrivalue.pk %}"><i class='fas fa-trash'></i></a></dd>
+        </dl>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+{% else %}
+  {% if user.is_authenticated %}
+  <p>There are no nutritional information values yet. <a href="{% url 'products:nutritionalvalues-create' product.pk %}">Create the first one</a>.</p>
+  {% else %}
+  <p>There are no nutritional information values yet. You must <a href="{% url 'login' %}">log in</a> to create the first one.</p>
+  {% endif %}
+{% endif %}
+{% endblock %}

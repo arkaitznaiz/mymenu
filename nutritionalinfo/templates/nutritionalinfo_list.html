@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load bootstrap4 %}
+{% load django_bootstrap_breadcrumbs %}
+
+{% block migas %}
+{% block breadcrumbs %}
+		{{ block.super }}
+    	{% breadcrumb_safe "<i class='fas fa-info-circle'></i> Nutritional info" 'nutritionalinfo:nutrinfo-list' %}
+{% endblock %}
+{% render_breadcrumbs "breadcrumbs.html" %}
+{% endblock %}
+
+{% block content %}
+<h2><i class='fas fa-info-circle'></i> Nutritional Information</h2>
+{% if nutrinfos %}
+<div class="row mx-auto">
+    <table class="col col-md-6 table table-striped table-hover">
+        <caption>Click on name to view detail, update or delete entry.</caption>
+        <tr>
+            <thead class="thead-dark text-center">
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Unit</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for nutrinfo in nutrinfos %}
+                <tr>
+                    <td><a href="{% url 'nutritionalinfo:nutrinfo-detail' nutrinfo.pk %}">{{ nutrinfo.name }}</a></td>
+                    <td>{{nutrinfo.unit}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+    </table>
+</div>
+
+{% if is_paginated %}
+    {% include "pagination.html" %}
+{% endif %}
+{% if user.is_authenticated %}
+<p><a class="btn btn-primary" type="button" href="{% url 'nutritionalinfo:nutrinfo-create' %}">Add entry</a></p>
+{% endif %}
+{% else %}
+{% if user.is_authenticated %}
+<p>There are no items yet. <a href="{% url 'nutritionalinfo:nutrinfo-create' %}">Create the first one</a>.</p>
+{% else %}
+<p>There are no items yet. You must <a href="{% url 'login' %}">log in</a> to create the first one.</p>
+{% endif %}
+{% endif %}
+{% endblock %}
