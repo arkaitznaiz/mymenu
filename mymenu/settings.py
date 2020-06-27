@@ -28,7 +28,7 @@ DEBUG = True
 if DEBUG:
     ALLOWED_HOSTS = []
 else:
-    ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+    ALLOWED_HOSTS = ['localhost', '127.0.0.1','mymenu.naiz.app',]
 
 LOGIN_REDIRECT_URL = 'index:index'
 LOGOUT_REDIRECT_URL = 'index:index'
@@ -134,6 +134,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_FILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
