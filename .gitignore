@@ -6,6 +6,9 @@ __pycache__
 db.sqlite3
 media
 
+# Unix socket
+mymenu.sock
+
 # Python # 
 *.py[cod] 
 *$py.class 
