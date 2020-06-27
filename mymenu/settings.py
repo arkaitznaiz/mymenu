@@ -23,12 +23,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '5rujiak$u7gp$@d!bv-k9pr6+17*=ok)-cz^i-%m=fb!3crm^j'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 if DEBUG:
     ALLOWED_HOSTS = []
 else:
-    ALLOWED_HOSTS = ['localhost', '127.0.0.1','mymenu.naiz.app',]
+    ALLOWED_HOSTS = ['mymenu.naiz.app',]
 
 LOGIN_REDIRECT_URL = 'index:index'
 LOGOUT_REDIRECT_URL = 'index:index'
