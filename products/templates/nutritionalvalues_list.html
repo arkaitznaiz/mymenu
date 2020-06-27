@@ -41,7 +41,7 @@
     {% include "pagination.html" %}
 {% endif %}
 {% if user.is_authenticated %}
-<p><a class="btn btn-primary" type="button" href="{% url 'products:nutritionalvalues-create' %}">Add entry</a></p>
+<p><a class="btn btn-primary" type="button" href="{% url 'products:nutritionalvalues-create' %}"><i class="fas fa-plus"></i> Add entry</a></p>
 {% endif %}
 {% else %}
 {% if user.is_authenticated %}

@@ -29,8 +29,8 @@
 <br/>
 {% if user.is_authenticated %}
 <div class="row">
-  <div class="col col-9"><a class="btn btn-secondary" type="button" href="{% url 'nutritionalinfo:nutrinfo-update' nutrinfo.pk %}">Edit</a></div>
-  <div class="col col-3"><a class="btn btn-danger" type="button" href="{% url 'nutritionalinfo:nutrinfo-delete' nutrinfo.pk %}">Delete</a></div>
+  <div class="col col-9"><a class="btn btn-secondary" type="button" href="{% url 'nutritionalinfo:nutrinfo-update' nutrinfo.pk %}"><i class="fas fa-pen"></i> Edit</a></div>
+  <div class="col col-3"><a class="btn btn-danger" type="button" href="{% url 'nutritionalinfo:nutrinfo-delete' nutrinfo.pk %}"><i class="fas fa-trash"></i> Delete</a></div>
 </div>
 {% endif %}
 {% endblock %}
