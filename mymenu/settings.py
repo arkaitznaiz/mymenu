@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '5rujiak$u7gp$@d!bv-k9pr6+17*=ok)-cz^i-%m=fb!3crm^j'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 if DEBUG:
     ALLOWED_HOSTS = []
@@ -140,6 +140,12 @@ STATIC_FILES_DIRS = [
 ]
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+#naizapp_smtp_user (IAM for sending SMTP on Amazon SES)
+#Nombre de usuario de SMTP:
+#AKIAYRRVBPLPHNF3KDV4
+#Contraseña de SMTP:
+#BJ4ZquLyo0lJAusTcvFd/XK0i0SYHXHz5w5+zDhHidp0
 
 #Used by django-registration. 'True' if you prefer direct one step registration.
 REGISTRATION_OPEN = True

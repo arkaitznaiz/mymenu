@@ -27,24 +27,42 @@
   </div>
 {% endif %}
 <div class="row mx-auto">
-	<div class="col col-5 card">
+	<div class="col-sm card">
 		<div class="card-header">
 			<h3 class="card-title"><i class='fas fa-utensils'></i> Products</h3>
 		</div>
 		<div class="card-body">
-			<p class="lead">List of our products with nutritional information</p>
-			<p><a class="btn btn-huge btn-primary" type="button" href="{% url 'products:product-list' %}">View list</a></p>
+			{% if productlistexists %}
+				<p class="lead">List of our products with nutritional information</p>
+				<p><a class="btn btn-huge btn-primary" type="button" href="{% url 'products:product-list' %}">View list</a></p>
+			{% else %}
+				<p class="lead">There are no products yet.</p>
+				{% if not user.is_authenticated %}
+					<p><a href="{% url 'login' %}">Login to create the first one.</a></p>
+				{% else %}
+					{% if nutritionalinfolistexists %}
+						<p><a class="btn btn-secondary" type="button" href="{% url 'products:product-create' %}"><i class="fas fa-plus"></i> Create the first one</a></p>
+					{% else %}
+						<p>You should create a nutritional information entry first.</p>
+					{% endif %}
+				{% endif %}
+			{% endif %}
 		</div>
 	</div>
 	{% if user.is_authenticated %}
-	<div class="col col-2"></div>
-	<div class="col col-5 card">
+	<div class="col-sm-2"></div>
+	<div class="col-sm card">
 		<div class="card-header">
 			<h3 class="card-title"><i class='fas fa-info-circle'></i> Nutritional Information</h3>
 		</div>
 		<div class="card-body">
-			<p class="lead">List of nutritional information and its units</p>
-			<p><a class="btn btn-huge btn-primary" type="button" href="{% url 'nutritionalinfo:nutrinfo-list' %}">View list</a></p>
+			{% if nutritionalinfolistexists %}
+				<p class="lead">List of nutritional information and its units</p>
+				<p><a class="btn btn-primary" type="button" href="{% url 'nutritionalinfo:nutrinfo-list' %}">View list</a></p>
+			{% else %}
+				<p class="lead">There are no nutritional information entries yet.</p>
+				<p><a class="btn btn-primary" type="button" href="{% url 'nutritionalinfo:nutrinfo-create' %}"><i class="fas fa-plus"></i> Create the first one</a></p>
+			{% endif %}
 		</div>
 	</div>
 	{% endif %}
