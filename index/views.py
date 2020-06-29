@@ -2,8 +2,10 @@ from django.views.generic.base import TemplateView
 from django.shortcuts import render
 from products.models import Products
 from nutritionalinfo.models import NutritionalInfo
+from django.contrib.messages.views import SuccessMessageMixin
 
-class HomePageView(TemplateView):
+
+class HomePageView(SuccessMessageMixin, TemplateView):
 
     template_name = "index.html"
 

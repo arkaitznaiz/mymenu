@@ -4,12 +4,13 @@ from django.views.generic import ListView, CreateView, DetailView, UpdateView, D
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.urls import reverse_lazy
 from django.shortcuts import get_object_or_404, get_list_or_404
+from django.contrib.messages.views import SuccessMessageMixin
 
 from .models import Products, NutritionalValues
 
 
 @method_decorator(login_required, name='dispatch')
-class ProductsCreateView(CreateView):
+class ProductsCreateView(SuccessMessageMixin, CreateView):
     '''This class based view is intended for creating a new entry for Products model'''
 
     model = Products
@@ -33,7 +34,7 @@ class ProductsDetailView(DetailView):
         return context
 
 @method_decorator(login_required, name='dispatch')
-class ProductsUpdateView(UpdateView):
+class ProductsUpdateView(SuccessMessageMixin, UpdateView):
 
     model = Products
     template_name = 'products_update.html'
@@ -45,7 +46,7 @@ class ProductsUpdateView(UpdateView):
         return reverse_lazy('products:product-detail', kwargs={'pk': self.object.id})
 
 @method_decorator(login_required, name='dispatch')
-class ProductsDeleteView(DeleteView):
+class ProductsDeleteView(SuccessMessageMixin, DeleteView):
     model = Products
     template_name = 'products_delete.html'
     context_object_name = 'product'
@@ -54,7 +55,7 @@ class ProductsDeleteView(DeleteView):
 
 
 @method_decorator(login_required, name='dispatch')
-class NutritionalValuesCreateView(CreateView):
+class NutritionalValuesCreateView(SuccessMessageMixin, CreateView):
     '''This class based view is intended for creating a new entry for NutritionalValues model'''
 
     model = NutritionalValues
@@ -81,7 +82,7 @@ class NutritionalValuesDetailView(DetailView):
     context_object_name = 'nutritionalvalue'
 
 @method_decorator(login_required, name='dispatch')
-class NutritionalValuesUpdateView(UpdateView):
+class NutritionalValuesUpdateView(SuccessMessageMixin, UpdateView):
 
     model = NutritionalValues
     template_name = 'nutritionalvalues_update.html'
@@ -98,7 +99,7 @@ class NutritionalValuesUpdateView(UpdateView):
         return context
 
 @method_decorator(login_required, name='dispatch')
-class NutritionalValuesDeleteView(DeleteView):
+class NutritionalValuesDeleteView(SuccessMessageMixin, DeleteView):
     model = NutritionalValues
     template_name = 'nutritionalvalues_delete.html'
     context_object_name = 'nutritionalvalue'

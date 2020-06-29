@@ -3,10 +3,11 @@ from django.utils.decorators import method_decorator
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.urls import reverse_lazy
+from django.contrib.messages.views import SuccessMessageMixin
 
 from .models import NutritionalInfo
 
-class NutritionalInfoListView(ListView):
+class NutritionalInfoListView(SuccessMessageMixin, ListView):
     '''This class based view is intended for listing nutritional info elements from NutritionalInfo model'''
 
     model = NutritionalInfo
@@ -29,7 +30,7 @@ class NutritionalInfoListView(ListView):
         return context
 
 @method_decorator(login_required, name='dispatch')
-class NutritionalInfoCreateView(CreateView):
+class NutritionalInfoCreateView(SuccessMessageMixin, CreateView):
     '''This class based view is intended for creating a new entry for NutritionalInfo model'''
 
     model = NutritionalInfo
@@ -38,14 +39,14 @@ class NutritionalInfoCreateView(CreateView):
     success_url = reverse_lazy('nutritionalinfo:nutrinfo-list')
     success_message = "Nutritional information item created!"
 
-class NutritionalInfoDetailView(DetailView):
+class NutritionalInfoDetailView(SuccessMessageMixin, DetailView):
 
     model = NutritionalInfo
     template_name = 'nutritionalinfo_detail.html'
     context_object_name = 'nutrinfo'
 
 @method_decorator(login_required, name='dispatch')
-class NutritionalInfoUpdateView(UpdateView):
+class NutritionalInfoUpdateView(SuccessMessageMixin, UpdateView):
 
     model = NutritionalInfo
     template_name = 'nutritionalinfo_update.html'
@@ -57,7 +58,7 @@ class NutritionalInfoUpdateView(UpdateView):
         return reverse_lazy('nutritionalinfo:nutrinfo-detail', kwargs={'pk': self.object.id})
 
 @method_decorator(login_required, name='dispatch')
-class NutritionalInfoDeleteView(DeleteView):
+class NutritionalInfoDeleteView(SuccessMessageMixin, DeleteView):
     model = NutritionalInfo
     template_name = 'nutritionalinfo_delete.html'
     success_url = reverse_lazy('nutritionalinfo:nutrinfo-list')
