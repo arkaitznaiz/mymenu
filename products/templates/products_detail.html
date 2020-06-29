@@ -31,8 +31,8 @@
 <br/>
 {% if user.is_authenticated %}
 <div class="row">
-  <div class="col col-9"><a class="btn btn-secondary" type="button" href="{% url 'products:product-update' product.pk %}"><i class="fas fa-pen"></i> Edit</a></div>
-  <div class="col col-3"><a class="btn btn-danger" type="button" href="{% url 'products:product-delete' product.pk %}"><i class="fas fa-trash"></i> Delete</a></div>
+  <div class="col"><a class="btn btn-secondary float-left" type="button" href="{% url 'products:product-update' product.pk %}"><i class="fas fa-pen"></i> Edit</a></div>
+  <div class="col"><a class="btn btn-danger float-right" type="button" href="{% url 'products:product-delete' product.pk %}"><i class="fas fa-trash"></i> Delete</a></div>
 </div>
 <br/>
 {% endif %}
@@ -40,7 +40,7 @@
 {% if nutritionalvalues %}
   <div class="row card mx-auto">
     <div class="card-header">
-        <h5 class="card-title">Nutritional values{% if user.is_authenticated %}&nbsp;&nbsp;&nbsp;<a class="btn btn-outline-success" href="{% url 'products:nutritionalvalues-create' product.pk %}"><i class='fas fa-plus'></i> Add entry</a>{% endif %}</h5>
+        <h3 class="card-title">Nutritional values{% if user.is_authenticated %}&nbsp;&nbsp;&nbsp;<a class="btn btn-outline-success" href="{% url 'products:nutritionalvalues-create' product.pk %}"><i class='fas fa-plus'></i> Add entry</a>{% endif %}</h3>
     </div>
     <div class="card-body">
       {% for nutrivalue in nutritionalvalues %}
