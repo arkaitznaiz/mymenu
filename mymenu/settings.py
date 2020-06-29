@@ -1,6 +1,9 @@
 from django.conf.global_settings import DEFAULT_FROM_EMAIL
 
 import os
+import dotenv
+
+dotenv.read_dotenv()
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -13,7 +16,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '5rujiak$u7gp$@d!bv-k9pr6+17*=ok)-cz^i-%m=fb!3crm^j'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True if os.getenv("DEBUGGING") == 'True' else False
 
 if DEBUG:
     ALLOWED_HOSTS = []
@@ -105,11 +108,11 @@ WSGI_APPLICATION = 'mymenu.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'mymenu',
-        'USER': 'mymenu',
-        'PASSWORD': 'mymenuadmin',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'NAME': os.getenv("PG_DB_NAME"),
+        'USER': os.getenv("PG_USER"),
+        'PASSWORD': os.getenv("PG_USER_PASSWORD"),
+        'HOST': os.getenv("PG_HOST"),
+        'PORT': os.getenv("PG_PORT"),
     }
 }
 
@@ -174,8 +177,8 @@ else:
     CELERY_EMAIL_BACKEND = 'django_ses.SESBackend'
     AWS_SES_REGION_NAME = 'eu-central-1'
     AWS_SES_REGION_ENDPOINT = 'email.eu-central-1.amazonaws.com'
-    AWS_SES_ACCESS_KEY_ID = 'AKIAYRRVBPLPG2ABPFPJ'
-    AWS_SES_SECRET_ACCESS_KEY = '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'
+    AWS_SES_ACCESS_KEY_ID = os.getenv("SES_USER")
+    AWS_SES_SECRET_ACCESS_KEY = os.getenv("SES_USER_PASSWORD")
 
 CELERY_BROKER_URL = 'redis://localhost:6379/0'
 CELERY_RESULT_BACKEND = 'django-db'

@@ -5,6 +5,7 @@ django-bootstrap4
 django-bootstrap-breadcrumbs
 django-celery-email
 django-celery-results
+django-dotenv
 django-filter
 django-redis==4.7
 django-ses
