@@ -20,6 +20,7 @@
     <div class="card-body">
         <form method="post">
             {% csrf_token %}
+            {% bootstrap_form_errors form layout='inline' %}
             {% bootstrap_form form %}
             <button type="submit" class="btn btn-success"><i class="fas fa-pen"></i> Update</button>
         </form>
