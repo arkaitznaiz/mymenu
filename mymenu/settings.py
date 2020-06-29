@@ -172,8 +172,8 @@ if DEBUG:
 else:
     EMAIL_BACKEND = 'djcelery_email.backends.CeleryEmailBackend'
     CELERY_EMAIL_BACKEND = 'django_ses.SESBackend'
-    AWS_SES_REGION_NAME = 'eu-west-1'
-    AWS_SES_REGION_ENDPOINT = 'email.eu-west-1.amazonaws.com'
+    AWS_SES_REGION_NAME = 'eu-central-1'
+    AWS_SES_REGION_ENDPOINT = 'email.eu-central-1.amazonaws.com'
     AWS_SES_ACCESS_KEY_ID = 'AKIAYRRVBPLPG2ABPFPJ'
     AWS_SES_SECRET_ACCESS_KEY = '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'
 
