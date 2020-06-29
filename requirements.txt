@@ -1,7 +1,14 @@
+celery
 Django
 django-registration
 django-bootstrap4
 django-bootstrap-breadcrumbs
+django-celery-email
+django-celery-results
 django-filter
+django-redis==4.7
+django-ses
+msgpack==0.6.2
 psycopg2
+redis
 uwsgi
