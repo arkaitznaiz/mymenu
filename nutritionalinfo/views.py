@@ -36,6 +36,7 @@ class NutritionalInfoCreateView(CreateView):
     template_name = 'nutritionalinfo_create.html'
     fields = ('name', 'unit',)
     success_url = reverse_lazy('nutritionalinfo:nutrinfo-list')
+    success_message = "Nutritional information item created!"
 
 class NutritionalInfoDetailView(DetailView):
 
@@ -50,6 +51,7 @@ class NutritionalInfoUpdateView(UpdateView):
     template_name = 'nutritionalinfo_update.html'
     context_object_name = 'nutrinfo'
     fields = ('name', 'unit',)
+    success_message = "Nutritional information item updated!"
 
     def get_success_url(self):
         return reverse_lazy('nutritionalinfo:nutrinfo-detail', kwargs={'pk': self.object.id})
@@ -59,3 +61,4 @@ class NutritionalInfoDeleteView(DeleteView):
     model = NutritionalInfo
     template_name = 'nutritionalinfo_delete.html'
     success_url = reverse_lazy('nutritionalinfo:nutrinfo-list')
+    success_message = "Nutritional information item deleted!"

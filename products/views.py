@@ -16,6 +16,7 @@ class ProductsCreateView(CreateView):
     template_name = 'products_create.html'
     fields = ('name', 'description', 'active',)
     success_url = reverse_lazy('products:product-list')
+    success_message = "Product item created!"
 
 class ProductsDetailView(DetailView):
 
@@ -38,6 +39,7 @@ class ProductsUpdateView(UpdateView):
     template_name = 'products_update.html'
     context_object_name = 'product'
     fields = ('name', 'description', 'active')
+    success_message = "Product item updated!"
 
     def get_success_url(self):
         return reverse_lazy('products:product-detail', kwargs={'pk': self.object.id})
@@ -48,6 +50,7 @@ class ProductsDeleteView(DeleteView):
     template_name = 'products_delete.html'
     context_object_name = 'product'
     success_url = reverse_lazy('products:product-list')
+    success_message = "Product item deleted!"
 
 
 @method_decorator(login_required, name='dispatch')
@@ -57,6 +60,7 @@ class NutritionalValuesCreateView(CreateView):
     model = NutritionalValues
     template_name = 'nutritionalvalues_create.html'
     fields = ('nutritionalinfo', 'value',)
+    success_message = "Nutritional value item created!"
 
     def get_context_data(self, **kwargs):
         context = super(NutritionalValuesCreateView, self).get_context_data(**kwargs)
@@ -83,6 +87,7 @@ class NutritionalValuesUpdateView(UpdateView):
     template_name = 'nutritionalvalues_update.html'
     context_object_name = 'nutritionalvalue'
     fields = ('value',)
+    success_message = "Nutritional value item updated!"
 
     def get_success_url(self):
         return reverse_lazy('products:product-detail', kwargs={'pk': self.object.product.id })
@@ -97,6 +102,7 @@ class NutritionalValuesDeleteView(DeleteView):
     model = NutritionalValues
     template_name = 'nutritionalvalues_delete.html'
     context_object_name = 'nutritionalvalue'
+    success_message = "Nutritional value item deleted!"
     
     def get_success_url(self):
         return reverse_lazy('products:product-detail', kwargs={'pk': self.object.product.id })

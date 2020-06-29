@@ -40,7 +40,7 @@
 {% if nutritionalvalues %}
   <div class="row card mx-auto">
     <div class="card-header">
-        <h3 class="card-title">Nutritional values{% if user.is_authenticated %}&nbsp;&nbsp;&nbsp;<a class="btn btn-outline-success" href="{% url 'products:nutritionalvalues-create' product.pk %}"><i class='fas fa-plus'></i> Add entry</a>{% endif %}</h3>
+        <h5 class="card-title">Nutritional values{% if user.is_authenticated %}&nbsp;&nbsp;&nbsp;<a class="btn btn-outline-success" href="{% url 'products:nutritionalvalues-create' product.pk %}"><i class='fas fa-plus'></i> Add entry</a>{% endif %}</h5>
     </div>
     <div class="card-body">
       {% for nutrivalue in nutritionalvalues %}

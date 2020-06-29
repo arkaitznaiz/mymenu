@@ -1,11 +1,11 @@
 {% extends "nutritionalinfo_list.html" %}
-
+{% load nutrinfo_extras %}
 {% load django_bootstrap_breadcrumbs %}
 
 {% block migas %}
 {% block breadcrumbs %}
 		{{ block.super }}
-    	{% breadcrumb_safe "<i class='fas fa-eye'></i> Detail" 'nutritionalinfo:nutrinfo-detail' object.pk %}
+    	{% breadcrumb_safe object.name|detail 'nutritionalinfo:nutrinfo-detail' object.pk %}
 {% endblock %}
 {% render_breadcrumbs "breadcrumbs.html" %}
 {% endblock %}
