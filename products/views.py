@@ -17,7 +17,10 @@ class ProductsCreateView(SuccessMessageMixin, CreateView):
     template_name = 'products_create.html'
     fields = ('name', 'description', 'active',)
     success_url = reverse_lazy('products:product-list')
-    success_message = "Product item created!"
+    success_message = "Product item created! Now create a nutritional value entry!"
+
+    def get_success_url(self):
+        return reverse_lazy('products:nutritionalvalues-create', kwargs={'pk': self.object.id})
 
 class ProductsDetailView(DetailView):
 
