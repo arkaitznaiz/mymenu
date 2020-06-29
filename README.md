@@ -3,7 +3,7 @@ Test project for Serem
 
 # Demo site
 
-You can access a demo site in [link https://mymenu.naiz.app](https://mymenu.naiz.app). If you don't have an account, just create one.
+You can access a demo site in [https://mymenu.naiz.app](https://mymenu.naiz.app). If you don't have an account, just create one.
 
 # Run
 You must use PostgreSQL and set it (view mymenu/settings.py). You could used SQLite if you want to, but you'll have to change configuration in mymenu/settings.py.
