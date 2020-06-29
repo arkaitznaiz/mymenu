@@ -21,7 +21,7 @@ DEBUG = True if os.getenv("DEBUGGING") == 'True' else False
 if DEBUG:
     ALLOWED_HOSTS = []
 else:
-    ALLOWED_HOSTS = ['mymenu.naiz.app',]
+    ALLOWED_HOSTS = ['localhost','127.0.0.1','mymenu.naiz.app',]
 
 LOGIN_REDIRECT_URL = 'index:index'
 LOGOUT_REDIRECT_URL = 'index:index'
@@ -159,14 +159,6 @@ STATIC_FILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
-#naizapp_smtp_user (IAM for sending SMTP on Amazon SES)
-#Nombre de usuario de SMTP:
-#
-#Contraseña de SMTP:
-#
-
 #Used by django-registration. 'True' if you prefer direct one step registration.
 REGISTRATION_OPEN = True
 
@@ -177,8 +169,8 @@ else:
     CELERY_EMAIL_BACKEND = 'django_ses.SESBackend'
     AWS_SES_REGION_NAME = 'eu-central-1'
     AWS_SES_REGION_ENDPOINT = 'email.eu-central-1.amazonaws.com'
-    AWS_SES_ACCESS_KEY_ID = os.getenv("SES_USER")
-    AWS_SES_SECRET_ACCESS_KEY = os.getenv("SES_USER_PASSWORD")
+    AWS_ACCESS_KEY_ID = os.getenv("SES_USER")
+    AWS_SECRET_ACCESS_KEY = os.getenv("SES_USER_PASSWORD")
 
 CELERY_BROKER_URL = 'redis://localhost:6379/0'
 CELERY_RESULT_BACKEND = 'django-db'
@@ -187,6 +179,6 @@ CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 
-DEFAULT_FROM_EMAIL = "My Menu <no-reply@naiz.app>"
+DEFAULT_FROM_EMAIL = "My Menu<no-reply@naiz.app>"
 SERVER_EMAIL = DEFAULT_FROM_EMAIL
 ADMINS = [('Arkaitz Múgica Islas', 'arkaitzmugica@protonmail.com'), ]
