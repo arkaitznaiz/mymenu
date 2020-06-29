@@ -184,6 +184,6 @@ CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 
-DEFAULT_FROM_EMAIL = "Ahulkom <no_responder-do_not_reply@ahulkom.es>"
+DEFAULT_FROM_EMAIL = "My Menu <no-reply@naiz.app>"
 SERVER_EMAIL = DEFAULT_FROM_EMAIL
-ADMINS = [('Arkaitz Múgica Islas', 'sistemas@ahulkom.es'), ]
+ADMINS = [('Arkaitz Múgica Islas', 'arkaitzmugica@protonmail.com'), ]
